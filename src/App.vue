@@ -1,10 +1,20 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+    <router-link to="/cart">Cart</router-link>
+  </nav> -->
+  <main-header />
   <router-view />
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import MainHeader from './components/MainHeader.vue';
+
+export default defineComponent({
+  components: { MainHeader },
+});
+</script>
 
 <style lang="scss">
 #app {
