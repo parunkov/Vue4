@@ -1,6 +1,8 @@
 <template>
   <div class="navigation">
-    <router-link to="/">Home</router-link>
+    <router-link to="/">
+      <img :src="require('@/assets/images/logo.png')" />
+    </router-link>
     <router-link to="/cart">
       <div class="cart-button">
         <div class="cart-image" v-html="cartIcon"></div>
@@ -12,6 +14,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { cartIcon } from '@/assets/images';
+// import logo from '@/assets/images/logo.png';
 
 export default defineComponent({
   data() {
