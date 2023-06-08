@@ -1,9 +1,9 @@
 <template>
-  <div class="navigation">
+  <div class="navigation" :class="{ navigation_cart: $router.currentRoute.value.name === 'cart' }">
     <router-link to="/">
       <img :src="require('@/assets/images/logo.png')" />
     </router-link>
-    <router-link to="/cart">
+    <router-link v-if="$router.currentRoute.value.name === 'home'" to="/cart">
       <div class="cart-button">
         <div class="cart-image" v-html="cartIcon"></div>
         <div class="cart-counter"></div>
@@ -20,6 +20,11 @@ export default defineComponent({
   data() {
     return { cartIcon };
   },
+  //   methods: {
+  //     onNavigationClick() {
+  //       console.log(this.$router.currentRoute.value.name);
+  //     },
+  //   },
 });
 </script>
 <style lang="scss" scoped>
