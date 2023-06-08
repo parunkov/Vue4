@@ -2,9 +2,9 @@
   <div class="catalog-card">
     <img :src="require(`@/assets${image}`)" class="catalog-card__image" />
     <div class="catalog-card__content">
-      <div class="catalog-card__title">{{ title }}</div>
+      <h3 class="catalog-card__title">{{ title }}</h3>
       <div class="catalog-card__brand">{{ `Brand ${brand}` }}</div>
-      <div class="catalog-card__price">{{ price?.value }}</div>
+      <div class="catalog-card__price">{{ '$' + price?.value }}</div>
       <button type="button">Add to Basket</button>
     </div>
   </div>
@@ -38,10 +38,33 @@ export default defineComponent({
     padding-bottom: 10px;
     button {
       width: 100%;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background: black;
+      color: white;
+      font-size: 14px;
+      outline: none;
+      border: 1px solid black;
+      cursor: pointer;
+      &:hover {
+        color: black;
+        background: white;
+        border: 1px solid black;
+      }
     }
   }
   &__image {
     width: 200px;
+  }
+  &__title {
+    margin-bottom: 5px;
+  }
+  &__brand {
+    margin-bottom: 5px;
+  }
+  &__price {
+    font-weight: 700;
+    margin-bottom: 10px;
   }
 }
 </style>

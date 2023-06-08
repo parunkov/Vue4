@@ -1,12 +1,13 @@
 <template>
-  <main class="catalog">
+  <div class="catalog">
     <aside>
       <catalog-filter />
     </aside>
-    <div class="calalog__grid">
+    <main>
+      <h1>Catalog</h1>
       <catalog-grid />
-    </div>
-  </main>
+    </main>
+  </div>
 </template>
 
 <script lang="ts">
@@ -28,10 +29,18 @@ export default defineComponent({
 <style lang="scss" scoped>
 .catalog {
   display: flex;
+  padding-top: 15px;
   aside {
     flex: 0 0 200px;
     text-align: left;
     padding: 10px;
+  }
+  main {
+    text-align: left;
+    h1 {
+      padding-left: 15px;
+      margin-bottom: 15px;
+    }
   }
 }
 </style>
