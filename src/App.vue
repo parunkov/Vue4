@@ -1,10 +1,8 @@
 <template>
-  <!-- <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/cart">Cart</router-link>
-  </nav> -->
-  <main-header />
-  <router-view />
+  <div class="container">
+    <main-header />
+    <router-view />
+  </div>
 </template>
 
 <script lang="ts">
@@ -17,6 +15,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
