@@ -1,5 +1,8 @@
 <template>
-  <div class="navigation" :class="{ navigation_cart: $router.currentRoute.value.name === 'cart' }">
+  <div
+    class="navigation"
+    :class="{ navigation_page_cart: $router.currentRoute.value.name === 'cart' }"
+  >
     <router-link to="/">
       <img :src="require('@/assets/images/logo.png')" />
     </router-link>
@@ -32,6 +35,9 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
+  &_page_cart {
+    justify-content: space-around;
+  }
 }
 .cart-button {
   position: relative;

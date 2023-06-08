@@ -39,4 +39,8 @@ nav {
     }
   }
 }
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+}
 </style>
