@@ -8,8 +8,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import MainHeader from './components/MainHeader.vue';
+import { useStore } from 'vuex';
+import { key } from '@/store';
 
 export default defineComponent({
+  setup() {
+    const store = useStore(key);
+    store.state.cart;
+    // store.state.count;
+  },
   components: { MainHeader },
 });
 </script>

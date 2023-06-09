@@ -22,4 +22,16 @@ interface Brand {
   selected?: boolean;
 }
 
-export { Price, Product, Brand };
+interface CartItem {
+  title: string;
+  image: string;
+  price: number;
+  brandName: string;
+  value: number;
+}
+
+// interface State {
+//   cart: CartItem[];
+// }
+
+export { Price, Product, Brand, CartItem };

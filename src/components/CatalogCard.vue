@@ -5,23 +5,39 @@
       <h3 class="catalog-card__title">{{ title }}</h3>
       <div class="catalog-card__brand">{{ brandName }}</div>
       <div class="catalog-card__price">{{ '$' + price?.value }}</div>
-      <button type="button">Add to Basket</button>
+      <button type="button" @click="addToCart">Add to Basket</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { Price } from '@/types/types';
+import { CartItem, Price } from '@/types/types';
+// import { mapState } from 'vuex';
+// import { State } from '@/store';
 
 export default defineComponent({
   props: {
-    title: String,
-    image: String,
-    brandName: String,
-    price: Object as PropType<Price>,
+    title: { type: String, required: true },
+    image: { type: String, required: true },
+    brandName: { type: String, required: true },
+    price: { type: Object as PropType<Price>, required: true },
   },
   components: {},
+  methods: {
+    addToCart(): void {
+      const cartItem: CartItem = {
+        title: this.$props.title,
+        image: this.$props.image,
+        price: this.$props.price?.value,
+        brandName: this.$props.brandName,
+        value: 1,
+      };
+      console.log(this.$props.title);
+      this.$store.dispatch('addToCart', cartItem);
+      console.log(this.$store.state);
+    },
+  },
 });
 </script>
 <style lang="scss" scoped>
