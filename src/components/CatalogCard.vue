@@ -3,7 +3,7 @@
     <img :src="require(`@/assets${image}`)" class="catalog-card__image" />
     <div class="catalog-card__content">
       <h3 class="catalog-card__title">{{ title }}</h3>
-      <div class="catalog-card__brand">{{ `Brand ${brand}` }}</div>
+      <div class="catalog-card__brand">{{ brandName }}</div>
       <div class="catalog-card__price">{{ '$' + price?.value }}</div>
       <button type="button">Add to Basket</button>
     </div>
@@ -12,17 +12,13 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-
-interface Price {
-  currency: string;
-  value: number;
-}
+import { Price } from '@/types/types';
 
 export default defineComponent({
   props: {
     title: String,
     image: String,
-    brand: Number,
+    brandName: String,
     price: Object as PropType<Price>,
   },
   components: {},

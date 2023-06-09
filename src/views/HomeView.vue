@@ -5,24 +5,38 @@
     </aside>
     <main>
       <h1>Catalog</h1>
-      <catalog-grid />
+      <catalog-grid :products="products" />
     </main>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import products from '@/assets/products.json';
+import productsData from '@/assets/products.json';
 import brands from '@/assets/brands.json';
 import CatalogFilter from '@/components/CatalogFilter.vue';
 import CatalogGrid from '@/components/CatalogGrid.vue';
+import { Product } from '@/types/types';
 
 export default defineComponent({
+  data() {
+    return {
+      products: productsData as Product[],
+    };
+  },
   name: 'HomeView',
   components: { CatalogFilter, CatalogGrid },
   created() {
-    console.log(products);
+    console.log(productsData);
     console.log(brands);
+    const extendedProducts: Product[] = productsData;
+    extendedProducts.forEach((item: Product) => {
+      const brandId: number = item.brand;
+      const brandName: string | undefined = brands.find((item) => item.id === brandId)?.title;
+      item.brandName = brandName;
+    });
+    this.products = extendedProducts;
+    console.log(this.products);
   },
 });
 </script>

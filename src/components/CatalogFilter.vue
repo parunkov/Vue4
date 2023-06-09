@@ -18,14 +18,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import brands from '@/assets/brands.json';
-
-interface Brand {
-  id: number | string;
-  title: string;
-  sort: string;
-  code: string;
-  selected?: boolean;
-}
+import { Brand } from '@/types/types';
 
 export default defineComponent({
   data() {
@@ -41,14 +34,15 @@ export default defineComponent({
     this.brands = extendedBrands;
   },
   methods: {
-    onFilerClick(brand: Brand) {
+    onFilerClick(brand: Brand): void {
       this.allSelected = false;
       this.brands.forEach((item) => {
         item.selected = false;
       });
       brand.selected = true;
+      this.$emit('changeFilter');
     },
-    onAllFilersClick() {
+    onAllFilersClick(): void {
       this.brands.forEach((item) => {
         item.selected = false;
       });

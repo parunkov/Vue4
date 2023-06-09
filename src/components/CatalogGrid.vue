@@ -6,21 +6,19 @@
       :title="product.title"
       :image="product.image"
       :price="product.regular_price"
-      :brand="product.brand"
+      :brandName="product.brandName"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { PropType, defineComponent } from 'vue';
 import CatalogCard from './CatalogCard.vue';
-import products from '@/assets/products.json';
+import { Product } from '@/types/types';
 
 export default defineComponent({
-  data() {
-    return {
-      products,
-    };
+  props: {
+    products: Object as PropType<Product[]>,
   },
   components: { CatalogCard },
 });
