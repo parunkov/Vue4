@@ -16,11 +16,6 @@ export default defineComponent({
     const store = useStore(key);
     store.state.cart;
   },
-  // data() {
-  //   return {
-  //     cartQuantity: 0 as number,
-  //   };
-  // },
   components: { MainHeader },
 });
 </script>
@@ -51,7 +46,9 @@ nav {
   }
 }
 .container {
-  max-width: 1040px;
+  max-width: 1060px;
   margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 </style>

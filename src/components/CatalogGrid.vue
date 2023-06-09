@@ -28,5 +28,6 @@ export default defineComponent({
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  justify-content: space-between;
 }
 </style>
