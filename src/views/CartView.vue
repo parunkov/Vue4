@@ -7,7 +7,6 @@ import { ref, Ref } from 'vue';
 const store = useStore(key);
 store.state.cart;
 
-// console.log(store.state.cart);
 const currentSumm: number = store.state.cart.reduce(
   (summ, item) => Math.round((summ + item.price * item.quantity) * 100) / 100,
   0,

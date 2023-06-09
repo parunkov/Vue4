@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { CartItem } from '@/types/types';
-// import { ref } from 'vue';
 import { useStore } from 'vuex';
 import { key } from '@/store';
 import { up, down, trash } from '@/assets/images';
@@ -9,7 +8,6 @@ import { up, down, trash } from '@/assets/images';
 const store = useStore(key);
 store.state.cart;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   data: CartItem;
 }>();
