@@ -16,8 +16,10 @@ export const store = createStore<State>({
     cartQuantity: 0,
   },
   mutations: {
-    ADD_TO_CART(state, payload) {
-      const cartItem = state.cart.find((item) => item.title === payload.title);
+    ADD_TO_CART(state, payload): void {
+      const cartItem: CartItem | undefined = state.cart.find(
+        (item) => item.title === payload.title,
+      );
       if (cartItem) {
         cartItem.quantity += 1;
       } else {
@@ -27,7 +29,7 @@ export const store = createStore<State>({
     },
   },
   actions: {
-    addToCart({ commit }, payload) {
+    addToCart({ commit }, payload): void {
       commit('ADD_TO_CART', payload);
     },
   },

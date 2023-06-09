@@ -27,7 +27,6 @@ export default defineComponent({
       allSelected: false,
     };
   },
-  components: {},
   created() {
     const extendedBrands: Brand[] = brands;
     extendedBrands.forEach((item) => (item.selected = false));

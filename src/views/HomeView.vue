@@ -17,16 +17,8 @@ import brands from '@/assets/brands.json';
 import CatalogFilter from '@/components/CatalogFilter.vue';
 import CatalogGrid from '@/components/CatalogGrid.vue';
 import { Product } from '@/types/types';
-// import { mapState } from 'vuex';
-// import { useStore } from 'vuex';
-// import { key } from '@/store';
 
 export default defineComponent({
-  // setup() {
-  //   const store = useStore(key);
-  //   // store.state.cart;
-  //   store.state.count;
-  // },
   data() {
     return {
       products: productsData as Product[],
@@ -44,14 +36,7 @@ export default defineComponent({
       }
     },
   },
-  // computed: {
-  //   ...mapState({
-  //     cart: (state: State) => state.cart,
-  //   }),
-  // },
   created() {
-    // console.log(productsData);
-    // console.log(brands);
     const extendedProducts: Product[] = productsData;
     extendedProducts.forEach((item: Product) => {
       const brandId: number = item.brand;

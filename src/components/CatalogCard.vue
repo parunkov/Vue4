@@ -21,7 +21,6 @@ export default defineComponent({
     brandName: String,
     price: { type: Object as PropType<Price>, required: true },
   },
-  components: {},
   methods: {
     addToCart(): void {
       const cartItem: CartItem = {
