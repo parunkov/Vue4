@@ -26,7 +26,7 @@ export const store = createStore<State>({
       } else {
         state.cart.push(payload);
       }
-      state.cartQuantity += 1;
+      state.cartQuantity = state.cart.reduce((summ, item) => summ + item.quantity, 0);
     },
     REMOVE_FROM_CART(state, payload): void {
       const cartItem: CartItem | undefined = state.cart.find(
@@ -38,7 +38,12 @@ export const store = createStore<State>({
         const newCart: CartItem[] = state.cart.filter((item) => item.title !== payload.title);
         state.cart = newCart;
       }
-      state.cartQuantity -= 1;
+      state.cartQuantity = state.cart.reduce((summ, item) => summ + item.quantity, 0);
+    },
+    REMOVE_PRODUCT(state, payload): void {
+      const newCart: CartItem[] = state.cart.filter((item) => item.title !== payload.title);
+      state.cart = newCart;
+      state.cartQuantity = state.cart.reduce((summ, item) => summ + item.quantity, 0);
     },
   },
   actions: {
@@ -47,6 +52,9 @@ export const store = createStore<State>({
     },
     removeFromCart({ commit }, payload): void {
       commit('REMOVE_FROM_CART', payload);
+    },
+    removeProduct({ commit }, payload): void {
+      commit('REMOVE_PRODUCT', payload);
     },
   },
   plugins: [createPersistedState()],

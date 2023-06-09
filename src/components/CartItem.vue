@@ -20,6 +20,9 @@ const onPlusClick: () => void = () => {
 const onMinusClick: () => void = () => {
   store.dispatch('removeFromCart', props.data);
 };
+const onTrashClick: () => void = () => {
+  store.dispatch('removeProduct', props.data);
+};
 </script>
 
 <template>
@@ -35,7 +38,7 @@ const onMinusClick: () => void = () => {
     <div class="cart-item__total">
       {{ '$' + Math.round(data.price * data.quantity * 100) / 100 }}
     </div>
-    <div class="cart-item__remove-button" v-html="trash"></div>
+    <div class="cart-item__remove-button" v-html="trash" @click="onTrashClick"></div>
   </div>
 </template>
 
