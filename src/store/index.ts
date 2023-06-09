@@ -1,6 +1,7 @@
 import { CartItem } from '@/types/types';
 import { InjectionKey } from 'vue';
 import { createStore, Store } from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 export interface State {
   cart: CartItem[];
@@ -33,4 +34,5 @@ export const store = createStore<State>({
       commit('ADD_TO_CART', payload);
     },
   },
+  plugins: [createPersistedState()],
 });

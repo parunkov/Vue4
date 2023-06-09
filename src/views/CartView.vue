@@ -5,7 +5,6 @@ import { key } from '@/store';
 
 const store = useStore(key);
 store.state.cart;
-console.log(store);
 </script>
 
 <template>
@@ -21,7 +20,7 @@ console.log(store);
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .cart {
   padding-top: 20px;
 }
