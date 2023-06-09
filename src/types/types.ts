@@ -27,11 +27,7 @@ interface CartItem {
   image: string;
   price: number;
   brandName: string;
-  value: number;
+  quantity: number;
 }
-
-// interface State {
-//   cart: CartItem[];
-// }
 
 export { Price, Product, Brand, CartItem };

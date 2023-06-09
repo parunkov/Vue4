@@ -15,8 +15,12 @@ export const store = createStore<State>({
   },
   mutations: {
     ADD_TO_CART(state, payload) {
-      console.log(payload);
-      state.cart.push(payload);
+      const cartItem = state.cart.find((item) => item.title === payload.title);
+      if (cartItem) {
+        cartItem.quantity += 1;
+      } else {
+        state.cart.push(payload);
+      }
     },
   },
   actions: {

@@ -13,8 +13,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { CartItem, Price } from '@/types/types';
-// import { mapState } from 'vuex';
-// import { State } from '@/store';
 
 export default defineComponent({
   props: {
@@ -31,11 +29,9 @@ export default defineComponent({
         image: this.$props.image,
         price: this.$props.price?.value,
         brandName: this.$props.brandName,
-        value: 1,
+        quantity: 1,
       };
-      console.log(this.$props.title);
       this.$store.dispatch('addToCart', cartItem);
-      console.log(this.$store.state);
     },
   },
 });
