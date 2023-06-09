@@ -9,7 +9,7 @@
     <router-link v-if="$router.currentRoute.value.name === 'home'" to="/cart">
       <div class="cart-button">
         <div class="cart-image" v-html="cartIcon"></div>
-        <div class="cart-counter"></div>
+        <div v-if="cartQuantity > 0" class="cart-counter">{{ cartQuantity }}</div>
       </div>
     </router-link>
   </div>
@@ -17,17 +17,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { cartIcon } from '@/assets/images';
-// import logo from '@/assets/images/logo.png';
 
 export default defineComponent({
+  props: {
+    cartQuantity: { type: Number, required: true },
+  },
   data() {
     return { cartIcon };
   },
-  //   methods: {
-  //     onNavigationClick() {
-  //       console.log(this.$router.currentRoute.value.name);
-  //     },
-  //   },
 });
 </script>
 <style lang="scss" scoped>
@@ -52,8 +49,11 @@ export default defineComponent({
   right: 1px;
   min-width: 20px;
   height: 20px;
+  font-size: 12px;
+  color: black;
+  padding: 2px;
   background: white;
-  border: 1px solid red;
+  border: 1px solid black;
   border-radius: 10px;
 }
 </style>

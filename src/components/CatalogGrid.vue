@@ -6,7 +6,7 @@
       :title="product.title"
       :image="product.image"
       :price="product.regular_price"
-      :brandName="product.brandName"
+      :brand-name="product.brandName"
     />
   </div>
 </template>

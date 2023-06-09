@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <main-header />
+    <main-header :cart-quantity="$store.state.cartQuantity" />
     <router-view />
   </div>
 </template>
@@ -15,8 +15,12 @@ export default defineComponent({
   setup() {
     const store = useStore(key);
     store.state.cart;
-    // store.state.count;
   },
+  // data() {
+  //   return {
+  //     cartQuantity: 0 as number,
+  //   };
+  // },
   components: { MainHeader },
 });
 </script>

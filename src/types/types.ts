@@ -26,7 +26,7 @@ interface CartItem {
   title: string;
   image: string;
   price: number;
-  brandName: string;
+  brandName?: string;
   quantity: number;
 }
 

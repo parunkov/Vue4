@@ -18,7 +18,7 @@ export default defineComponent({
   props: {
     title: { type: String, required: true },
     image: { type: String, required: true },
-    brandName: { type: String, required: true },
+    brandName: String,
     price: { type: Object as PropType<Price>, required: true },
   },
   components: {},
