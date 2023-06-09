@@ -1,7 +1,7 @@
 <template>
   <div class="catalog">
     <aside>
-      <catalog-filter />
+      <catalog-filter @changeFilter="onChangeFilter" />
     </aside>
     <main>
       <h1>Catalog</h1>
@@ -26,6 +26,16 @@ export default defineComponent({
   },
   name: 'HomeView',
   components: { CatalogFilter, CatalogGrid },
+  methods: {
+    onChangeFilter(brand: number | null) {
+      if (brand) {
+        const filteredProducts: Product[] = productsData.filter((item) => item.brand === brand);
+        this.products = filteredProducts;
+      } else {
+        this.products = productsData;
+      }
+    },
+  },
   created() {
     console.log(productsData);
     console.log(brands);
@@ -36,7 +46,6 @@ export default defineComponent({
       item.brandName = brandName;
     });
     this.products = extendedProducts;
-    console.log(this.products);
   },
 });
 </script>

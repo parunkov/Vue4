@@ -40,13 +40,14 @@ export default defineComponent({
         item.selected = false;
       });
       brand.selected = true;
-      this.$emit('changeFilter');
+      this.$emit('changeFilter', brand.id);
     },
     onAllFilersClick(): void {
       this.brands.forEach((item) => {
         item.selected = false;
       });
       this.allSelected = true;
+      this.$emit('changeFilter', null);
     },
   },
 });
