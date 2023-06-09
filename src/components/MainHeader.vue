@@ -32,7 +32,7 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid black;
+  border-bottom: 3px solid black;
   min-height: 66px;
   &_page_cart {
     justify-content: space-around;

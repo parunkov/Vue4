@@ -13,8 +13,13 @@ store.state.cart;
 const props = defineProps<{
   data: CartItem;
 }>();
-console.log(store);
-console.log(2222);
+
+const onPlusClick: () => void = () => {
+  store.dispatch('addToCart', props.data);
+};
+const onMinusClick: () => void = () => {
+  store.dispatch('removeFromCart', props.data);
+};
 </script>
 
 <template>
@@ -24,10 +29,12 @@ console.log(2222);
     <div class="cart-item__price">{{ '$' + data.price }}</div>
     <div class="cart-item__quantity-wrapper">
       <div class="cart-item__quantity">{{ data.quantity }}</div>
-      <div type="button" class="cart-item__plus" v-html="up"></div>
-      <div type="button" class="cart-item__minus" v-html="down"></div>
+      <div type="button" class="cart-item__plus" v-html="up" @click="onPlusClick"></div>
+      <div type="button" class="cart-item__minus" v-html="down" @click="onMinusClick"></div>
     </div>
-    <div class="cart-item__total">{{ '$' + data.price * data.quantity }}</div>
+    <div class="cart-item__total">
+      {{ '$' + Math.round(data.price * data.quantity * 100) / 100 }}
+    </div>
     <div class="cart-item__remove-button" v-html="trash"></div>
   </div>
 </template>

@@ -26,12 +26,27 @@ export const store = createStore<State>({
       } else {
         state.cart.push(payload);
       }
-      state.cartQuantity = state.cartQuantity + 1;
+      state.cartQuantity += 1;
+    },
+    REMOVE_FROM_CART(state, payload): void {
+      const cartItem: CartItem | undefined = state.cart.find(
+        (item) => item.title === payload.title,
+      );
+      if (cartItem && cartItem.quantity > 1) {
+        cartItem.quantity -= 1;
+      } else {
+        const newCart: CartItem[] = state.cart.filter((item) => item.title !== payload.title);
+        state.cart = newCart;
+      }
+      state.cartQuantity -= 1;
     },
   },
   actions: {
     addToCart({ commit }, payload): void {
       commit('ADD_TO_CART', payload);
+    },
+    removeFromCart({ commit }, payload): void {
+      commit('REMOVE_FROM_CART', payload);
     },
   },
   plugins: [createPersistedState()],
