@@ -5,6 +5,9 @@
       <h3 class="catalog-card__title">{{ title }}</h3>
       <div class="catalog-card__brand">{{ brandName }}</div>
       <div class="catalog-card__price">{{ '$' + price?.value }}</div>
+      <div class="catalog-card__colors" v-if="colors.length > 0">
+        <div v-for="color in colors" :key="color.index">{{ color.avilablity }}</div>
+      </div>
       <button type="button" @click="addToCart">Add to Basket</button>
     </div>
   </div>
@@ -12,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { CartItem, Price, Options, Variant } from '@/types/types';
+import { CartItem, Price, Options, Variant, Property } from '@/types/types';
 
 export default defineComponent({
   props: {
@@ -23,6 +26,12 @@ export default defineComponent({
     type: { type: String, required: true },
     options: { type: Object as PropType<Options[]> | undefined },
     variants: { type: Object as PropType<Variant[]> | undefined },
+  },
+  data() {
+    return {
+      colors: [] as Property[],
+      sizes: [] as Property[],
+    };
   },
   methods: {
     addToCart(): void {
@@ -36,10 +45,25 @@ export default defineComponent({
       this.$store.dispatch('addToCart', cartItem);
     },
   },
+  created() {
+    // console.log(this.$props.variants);
+    if (this.$props.options) {
+      this.$props.options.forEach((item) => {
+        if (item.attribute_code === 'color') {
+          item.values.forEach((value) => {
+            this.colors.push({ label: value.label, index: value.value_index, value: value.value });
+          });
+        }
+        console.log(this.colors);
+      });
+    }
+  },
 });
 </script>
 <style lang="scss" scoped>
 .catalog-card {
+  display: flex;
+  flex-direction: column;
   text-align: left;
   margin: 5px;
   @media (max-width: 450px) {
@@ -47,6 +71,9 @@ export default defineComponent({
     width: 100%;
   }
   &__content {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 10px;
@@ -79,8 +106,12 @@ export default defineComponent({
     margin-bottom: 5px;
   }
   &__price {
+    flex: auto;
     font-weight: 700;
     margin-bottom: 10px;
+  }
+  &__colors {
+    display: flex;
   }
 }
 </style>

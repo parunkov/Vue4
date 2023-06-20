@@ -60,4 +60,11 @@ interface CartItem {
   quantity: number;
 }
 
-export { Price, Product, Brand, CartItem, Options, Variant };
+interface Property {
+  label: string;
+  value: string | number;
+  index: number;
+  avilablity?: boolean;
+}
+
+export { Price, Product, Brand, CartItem, Options, Variant, Property };

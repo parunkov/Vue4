@@ -17,7 +17,7 @@ import brands from '@/assets/brands.json';
 import CatalogFilter from '@/components/CatalogFilter.vue';
 import CatalogGrid from '@/components/CatalogGrid.vue';
 import { Product } from '@/types/types';
-console.log(productsData);
+// console.log(productsData);
 
 export default defineComponent({
   data() {
