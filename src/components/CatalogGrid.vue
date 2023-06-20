@@ -7,6 +7,9 @@
       :image="product.image"
       :price="product.regular_price"
       :brand-name="product.brandName"
+      :type="product.type"
+      :options="product.configurable_options"
+      :variants="product.variants"
     />
   </div>
 </template>

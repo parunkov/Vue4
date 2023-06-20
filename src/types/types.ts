@@ -3,6 +3,34 @@ interface Price {
   value: number;
 }
 
+interface ProductValue {
+  label: string;
+  value_index: number;
+  value: string | number;
+}
+
+interface Options {
+  attribute_code?: string;
+  label?: string;
+  values: ProductValue[];
+}
+
+interface Attributes {
+  code: string;
+  value_index: number;
+}
+
+interface VariantProduct {
+  id: number;
+  image: string;
+  sku: string;
+}
+
+interface Variant {
+  attributes: Attributes[];
+  product: VariantProduct;
+}
+
 interface Product {
   id: number;
   title: string;
@@ -12,6 +40,8 @@ interface Product {
   sku: string;
   type: string;
   brandName?: string;
+  configurable_options?: Options[];
+  variants?: Variant[];
 }
 
 interface Brand {
@@ -30,4 +60,4 @@ interface CartItem {
   quantity: number;
 }
 
-export { Price, Product, Brand, CartItem };
+export { Price, Product, Brand, CartItem, Options, Variant };

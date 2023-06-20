@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { CartItem, Price } from '@/types/types';
+import { CartItem, Price, Options, Variant } from '@/types/types';
 
 export default defineComponent({
   props: {
@@ -20,6 +20,9 @@ export default defineComponent({
     image: { type: String, required: true },
     brandName: String,
     price: { type: Object as PropType<Price>, required: true },
+    type: { type: String, required: true },
+    options: { type: Object as PropType<Options[]> | undefined },
+    variants: { type: Object as PropType<Variant[]> | undefined },
   },
   methods: {
     addToCart(): void {

@@ -12,11 +12,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import productsData from '@/assets/products.json';
+import productsData from '@/assets/level3/products.json';
 import brands from '@/assets/brands.json';
 import CatalogFilter from '@/components/CatalogFilter.vue';
 import CatalogGrid from '@/components/CatalogGrid.vue';
 import { Product } from '@/types/types';
+console.log(productsData);
 
 export default defineComponent({
   data() {
