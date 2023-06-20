@@ -64,7 +64,8 @@ interface Property {
   label: string;
   value: string | number;
   index: number;
-  avilablity?: boolean;
+  avilablity: boolean;
+  selected: boolean;
 }
 
-export { Price, Product, Brand, CartItem, Options, Variant, Property };
+export { Price, Product, Brand, CartItem, Options, Variant, Property, Attributes };

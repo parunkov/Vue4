@@ -6,7 +6,25 @@
       <div class="catalog-card__brand">{{ brandName }}</div>
       <div class="catalog-card__price">{{ '$' + price?.value }}</div>
       <div class="catalog-card__colors" v-if="colors.length > 0">
-        <div v-for="color in colors" :key="color.index">{{ color.avilablity }}</div>
+        <div
+          v-for="color in colors"
+          :key="color.index"
+          class="catalog-card__color"
+          :style="`background: ${color.value}`"
+          :class="{ 'catalog-card__color_selected': color.selected }"
+          @click="() => onColorClick(color)"
+        ></div>
+      </div>
+      <div class="catalog-card__sizes" v-if="sizes.length > 0">
+        <div
+          v-for="size in sizes"
+          :key="size.index"
+          class="catalog-card__size"
+          :class="{ 'catalog-card__size_selected': size.selected }"
+          @click="() => onSizeClick(size)"
+        >
+          {{ size.label }}
+        </div>
       </div>
       <button type="button" @click="addToCart">Add to Basket</button>
     </div>
@@ -15,7 +33,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { CartItem, Price, Options, Variant, Property } from '@/types/types';
+import { CartItem, Price, Options, Variant, Property, Attributes } from '@/types/types';
 
 export default defineComponent({
   props: {
@@ -44,18 +62,61 @@ export default defineComponent({
       };
       this.$store.dispatch('addToCart', cartItem);
     },
+    onColorClick(color: Property): void {
+      this.colors.forEach((item) => {
+        item.selected = false;
+      });
+      color.selected = true;
+      this.checkAvilablity();
+    },
+    onSizeClick(size: Property): void {
+      this.sizes.forEach((item) => {
+        item.selected = false;
+      });
+      size.selected = true;
+      this.checkAvilablity();
+    },
+    checkAvilablity(): void {
+      // console.log(this.colors);
+      const currentColor = this.colors.find((item) => item.selected);
+      const currentSize = this.sizes.find((item) => item.selected);
+      // console.log('🚀 ~ file: CatalogCard.vue:83 ~ checkAvilablity ~ currentSize:', currentSize);
+      // console.log('🚀 ~ file: CatalogCard.vue:80 ~ checkAvilablity ~ currentColor:', currentColor);
+      const filterProperty = (code: string, index: number | undefined, mapCode: string) =>
+        this.$props.variants
+          ?.filter((item) =>
+            item.attributes.find(
+              (attribute: Attributes) => attribute.code === code && attribute.value_index === index,
+            ),
+          )
+          ?.map(
+            (item) => item.attributes.find((attribute) => attribute.code === mapCode)?.value_index,
+          );
+      const filteredSizes = filterProperty('color', currentColor?.index, 'size');
+      const filteredColors = filterProperty('size', currentSize?.index, 'color');
+    },
   },
   created() {
     // console.log(this.$props.variants);
+    const createData = (item: Options, code: string, dataItem: Property[]) => {
+      if (item.attribute_code === code) {
+        item.values.forEach((value, index) => {
+          dataItem.push({
+            label: value.label,
+            index: value.value_index,
+            value: value.value,
+            avilablity: true,
+            selected: index === 0,
+          });
+        });
+      }
+    };
     if (this.$props.options) {
       this.$props.options.forEach((item) => {
-        if (item.attribute_code === 'color') {
-          item.values.forEach((value) => {
-            this.colors.push({ label: value.label, index: value.value_index, value: value.value });
-          });
-        }
-        console.log(this.colors);
+        createData(item, 'color', this.colors);
+        createData(item, 'size', this.sizes);
       });
+      this.checkAvilablity();
     }
   },
 });
@@ -80,6 +141,7 @@ export default defineComponent({
     button {
       width: 100%;
       padding: 5px 10px;
+      margin-top: 10px;
       border-radius: 5px;
       background: black;
       color: white;
@@ -111,6 +173,24 @@ export default defineComponent({
     margin-bottom: 10px;
   }
   &__colors {
+    display: flex;
+  }
+  &__color,
+  &__size {
+    width: 40px;
+    height: 22px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    // border: 1px solid black;
+    text-align: center;
+    padding-top: 1px;
+    cursor: pointer;
+    &_selected {
+      border: 2px solid orange;
+    }
+  }
+  &__sizes {
     display: flex;
   }
 }
