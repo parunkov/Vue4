@@ -11,7 +11,10 @@
           :key="color.index"
           class="catalog-card__color"
           :style="`background: ${color.value}`"
-          :class="{ 'catalog-card__color_selected': color.selected }"
+          :class="{
+            'catalog-card__color_selected': color.selected,
+            'catalog-card__color_disabled': !color.avilablity,
+          }"
           @click="() => onColorClick(color)"
         ></div>
       </div>
@@ -20,7 +23,10 @@
           v-for="size in sizes"
           :key="size.index"
           class="catalog-card__size"
-          :class="{ 'catalog-card__size_selected': size.selected }"
+          :class="{
+            'catalog-card__size_selected': size.selected,
+            'catalog-card__size_disabled': !size.avilablity,
+          }"
           @click="() => onSizeClick(size)"
         >
           {{ size.label }}
@@ -94,6 +100,18 @@ export default defineComponent({
           );
       const filteredSizes = filterProperty('color', currentColor?.index, 'size');
       const filteredColors = filterProperty('size', currentSize?.index, 'color');
+      this.colors.forEach((item) => {
+        item.avilablity = false;
+        if (filteredColors?.includes(item.index)) {
+          item.avilablity = true;
+        }
+      });
+      this.sizes.forEach((item) => {
+        item.avilablity = false;
+        if (filteredSizes?.includes(item.index)) {
+          item.avilablity = true;
+        }
+      });
     },
   },
   created() {
@@ -177,17 +195,20 @@ export default defineComponent({
   }
   &__color,
   &__size {
+    position: relative;
     width: 40px;
     height: 22px;
     margin-right: 5px;
     margin-bottom: 5px;
     border-radius: 5px;
-    // border: 1px solid black;
     text-align: center;
     padding-top: 1px;
     cursor: pointer;
     &_selected {
       border: 2px solid orange;
+    }
+    &_disabled {
+      opacity: 0.2;
     }
   }
   &__sizes {
