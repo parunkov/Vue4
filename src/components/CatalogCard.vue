@@ -39,6 +39,10 @@ export default defineComponent({
 .catalog-card {
   text-align: left;
   margin: 5px;
+  @media (max-width: 450px) {
+    text-align: center;
+    width: 100%;
+  }
   &__content {
     padding-left: 15px;
     padding-right: 15px;
@@ -61,7 +65,9 @@ export default defineComponent({
     }
   }
   &__image {
+    display: block;
     width: 200px;
+    margin: 0 auto;
   }
   &__title {
     margin-bottom: 5px;

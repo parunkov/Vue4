@@ -51,10 +51,16 @@ export default defineComponent({
 .catalog {
   display: flex;
   padding-top: 15px;
+  @media (max-width: 450px) {
+    flex-direction: column;
+  }
   aside {
     flex: 0 0 200px;
     text-align: left;
     padding: 10px;
+    @media (max-width: 450px) {
+      flex: auto;
+    }
   }
   main {
     text-align: left;
