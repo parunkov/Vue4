@@ -1,6 +1,6 @@
 <template>
   <div class="catalog-card">
-    <img :src="require(`@/assets${image}`)" class="catalog-card__image" />
+    <img :src="require(`@/assets${cardImage}`)" class="catalog-card__image" />
     <div class="catalog-card__content">
       <h3 class="catalog-card__title">{{ title }}</h3>
       <div class="catalog-card__brand">{{ brandName }}</div>
@@ -48,7 +48,12 @@
           <img :src="require('@/assets/images/cross.png')" class="catalog-card__cross" />
         </div>
       </div>
-      <button type="button" @click="addToCart">Add to Basket</button>
+      <button v-if="avilablity" type="button" @click="addToCart" class="catalog-card__button">
+        Add to Basket
+      </button>
+      <button v-else type="button" class="catalog-card__button catalog-card__button_disabled">
+        Notify of availability
+      </button>
     </div>
   </div>
 </template>
@@ -71,6 +76,8 @@ export default defineComponent({
     return {
       colors: [] as Property[],
       sizes: [] as Property[],
+      cardImage: this.$props.image,
+      avilablity: true,
     };
   },
   methods: {
@@ -99,11 +106,8 @@ export default defineComponent({
       this.checkAvilablity();
     },
     checkAvilablity(): void {
-      // console.log(this.colors);
       const currentColor = this.colors.find((item) => item.selected);
       const currentSize = this.sizes.find((item) => item.selected);
-      // console.log('🚀 ~ file: CatalogCard.vue:83 ~ checkAvilablity ~ currentSize:', currentSize);
-      // console.log('🚀 ~ file: CatalogCard.vue:80 ~ checkAvilablity ~ currentColor:', currentColor);
       const filterProperty = (code: string, index: number | undefined, mapCode: string) =>
         this.$props.variants
           ?.filter((item) =>
@@ -116,6 +120,7 @@ export default defineComponent({
           );
       const filteredSizes = filterProperty('color', currentColor?.index, 'size');
       const filteredColors = filterProperty('size', currentSize?.index, 'color');
+
       this.colors.forEach((item) => {
         item.avilablity = false;
         if (filteredColors?.includes(item.index)) {
@@ -128,10 +133,17 @@ export default defineComponent({
           item.avilablity = true;
         }
       });
+
+      if (currentColor?.label === 'Red') this.cardImage = '/images/conf/red.png';
+      if (currentColor?.label === 'Blue') this.cardImage = '/images/conf/blue.png';
+      if (currentColor?.label === 'Black') this.cardImage = '/images/conf/black.png';
+
+      this.avilablity = true;
+      if (!currentColor?.avilablity) this.avilablity = false;
+      if (!currentColor?.avilablity) this.avilablity = false;
     },
   },
   created() {
-    // console.log(this.$props.variants);
     const createData = (item: Options, code: string, dataItem: Property[]) => {
       if (item.attribute_code === code) {
         item.values.forEach((value, index) => {
@@ -172,23 +184,6 @@ export default defineComponent({
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 10px;
-    button {
-      width: 100%;
-      padding: 5px 10px;
-      margin-top: 10px;
-      border-radius: 5px;
-      background: black;
-      color: white;
-      font-size: 14px;
-      outline: none;
-      border: 1px solid black;
-      cursor: pointer;
-      &:hover {
-        color: black;
-        background: white;
-        border: 1px solid black;
-      }
-    }
   }
   &__image {
     display: block;
@@ -247,6 +242,28 @@ export default defineComponent({
   }
   &__sizes {
     display: flex;
+  }
+  &__button {
+    width: 100%;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background: black;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    border: 1px solid black;
+    cursor: pointer;
+    &:hover {
+      color: black;
+      background: white;
+      border: 1px solid black;
+    }
+    &_disabled {
+      color: black;
+      background: white;
+      border: 1px solid black;
+    }
   }
 }
 </style>
