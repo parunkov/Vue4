@@ -7,29 +7,45 @@
       <div class="catalog-card__price">{{ '$' + price?.value }}</div>
       <div class="catalog-card__colors" v-if="colors.length > 0">
         <div
+          class="catalog-card__color-wrapper"
           v-for="color in colors"
           :key="color.index"
-          class="catalog-card__color"
-          :style="`background: ${color.value}`"
           :class="{
-            'catalog-card__color_selected': color.selected,
-            'catalog-card__color_disabled': !color.avilablity,
+            'catalog-card__color-wrapper_disabled': !color.avilablity,
           }"
           @click="() => onColorClick(color)"
-        ></div>
+        >
+          <div
+            class="catalog-card__color"
+            :style="`background: ${color.value}`"
+            :class="{
+              'catalog-card__color_selected': color.selected,
+              'catalog-card__color_disabled': !color.avilablity,
+            }"
+          ></div>
+          <img :src="require('@/assets/images/cross.png')" class="catalog-card__cross" />
+        </div>
       </div>
       <div class="catalog-card__sizes" v-if="sizes.length > 0">
         <div
+          class="catalog-card__size-wrapper"
           v-for="size in sizes"
           :key="size.index"
-          class="catalog-card__size"
           :class="{
-            'catalog-card__size_selected': size.selected,
-            'catalog-card__size_disabled': !size.avilablity,
+            'catalog-card__size-wrapper_disabled': !size.avilablity,
           }"
           @click="() => onSizeClick(size)"
         >
-          {{ size.label }}
+          <div
+            class="catalog-card__size"
+            :class="{
+              'catalog-card__size_selected': size.selected,
+              'catalog-card__size_disabled': !size.avilablity,
+            }"
+          >
+            {{ size.label }}
+          </div>
+          <img :src="require('@/assets/images/cross.png')" class="catalog-card__cross" />
         </div>
       </div>
       <button type="button" @click="addToCart">Add to Basket</button>
@@ -193,19 +209,37 @@ export default defineComponent({
   &__colors {
     display: flex;
   }
-  &__color,
-  &__size {
-    position: relative;
-    width: 40px;
+  &__cross {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
     height: 22px;
+    transform: translate(-50%, -50%);
+  }
+  &__color-wrapper,
+  &__size-wrapper {
+    position: relative;
     margin-right: 5px;
     margin-bottom: 5px;
+    cursor: pointer;
+    &_disabled {
+      .catalog-card__cross {
+        display: block;
+      }
+    }
+  }
+  &__color,
+  &__size {
+    width: 40px;
+    height: 22px;
     border-radius: 5px;
     text-align: center;
     padding-top: 1px;
-    cursor: pointer;
     &_selected {
-      border: 2px solid orange;
+      border: 2px solid white;
+      outline: 1px solid black;
     }
     &_disabled {
       opacity: 0.2;
