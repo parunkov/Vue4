@@ -48,6 +48,11 @@ const onItemClick: () => void = () => {
 }
 h1 {
   margin-bottom: 20px;
+  @media (max-width: 600px) {
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    border-bottom: 2px solid black;
+  }
 }
 .cart-item {
   border-bottom: 2px solid black;
@@ -56,6 +61,9 @@ h1 {
   display: flex;
   padding-bottom: 10px;
   border-bottom: 2px solid black;
+  @media (max-width: 600px) {
+    display: none;
+  }
   &__item {
     flex: auto;
   }
