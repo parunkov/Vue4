@@ -26,7 +26,11 @@ const onTrashClick: () => void = () => {
 <template>
   <div class="cart-item">
     <img :src="require(`@/assets${data.image}`)" class="cart-item__image" />
-    <h3 class="cart-item__title">{{ `${data.brandName} / ${data.title}` }}</h3>
+    <div class="cart-item__title-wrapper">
+      <h3 class="cart-item__title">{{ `${data.brandName} / ${data.title}` }}</h3>
+      <div v-if="data.color">Color: {{ data.color }}</div>
+      <div v-if="data.size">Size: {{ data.size }}</div>
+    </div>
     <div class="cart-item__price">{{ '$' + data.price }}</div>
     <div class="cart-item__quantity-wrapper">
       <div class="cart-item__quantity">{{ data.quantity }}</div>
@@ -47,10 +51,13 @@ const onTrashClick: () => void = () => {
   &__image {
     width: 130px;
   }
-  &__title {
+  &__title-wrapper {
     padding-left: 20px;
     flex: auto;
     text-align: left;
+  }
+  &__title {
+    margin-bottom: 5px;
   }
   &__price {
     width: 80px;
