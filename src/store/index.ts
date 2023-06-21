@@ -43,7 +43,15 @@ export const store = createStore<State>({
       if (cartItem && cartItem.quantity > 1) {
         cartItem.quantity -= 1;
       } else {
-        const newCart: CartItem[] = state.cart.filter((item) => item.title !== payload.title);
+        const newCart: CartItem[] = state.cart.filter(
+          (item) =>
+            !(
+              item.title === payload.title &&
+              item.brandName === payload.brandName &&
+              item.color === payload.color &&
+              item.size === payload.size
+            ),
+        );
         state.cart = newCart;
       }
       state.cartQuantity = state.cart.reduce((summ, item) => summ + item.quantity, 0);
