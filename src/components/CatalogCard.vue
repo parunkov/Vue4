@@ -78,15 +78,19 @@ export default defineComponent({
       sizes: [] as Property[],
       cardImage: this.$props.image,
       avilablity: true,
+      color: undefined as string | undefined,
+      size: undefined as string | undefined,
     };
   },
   methods: {
     addToCart(): void {
       const cartItem: CartItem = {
         title: this.$props.title,
-        image: this.$props.image,
+        image: this.cardImage,
         price: this.$props.price?.value,
         brandName: this.$props.brandName,
+        color: this.color,
+        size: this.size,
         quantity: 1,
       };
       this.$store.dispatch('addToCart', cartItem);
@@ -141,6 +145,9 @@ export default defineComponent({
       this.avilablity = true;
       if (!currentColor?.avilablity) this.avilablity = false;
       if (!currentColor?.avilablity) this.avilablity = false;
+
+      this.color = currentColor?.label;
+      this.size = currentSize?.label;
     },
   },
   created() {

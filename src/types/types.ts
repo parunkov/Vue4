@@ -58,6 +58,8 @@ interface CartItem {
   price: number;
   brandName?: string;
   quantity: number;
+  color?: string;
+  size?: string;
 }
 
 interface Property {
