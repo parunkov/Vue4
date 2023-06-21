@@ -19,7 +19,11 @@ export const store = createStore<State>({
   mutations: {
     ADD_TO_CART(state, payload): void {
       const cartItem: CartItem | undefined = state.cart.find(
-        (item) => item.title === payload.title,
+        (item) =>
+          item.title === payload.title &&
+          item.brandName === payload.brandName &&
+          item.color === payload.color &&
+          item.size === payload.size,
       );
       if (cartItem) {
         cartItem.quantity += 1;
@@ -30,7 +34,11 @@ export const store = createStore<State>({
     },
     REMOVE_FROM_CART(state, payload): void {
       const cartItem: CartItem | undefined = state.cart.find(
-        (item) => item.title === payload.title,
+        (item) =>
+          item.title === payload.title &&
+          item.brandName === payload.brandName &&
+          item.color === payload.color &&
+          item.size === payload.size,
       );
       if (cartItem && cartItem.quantity > 1) {
         cartItem.quantity -= 1;
